@@ -20,8 +20,8 @@
 class Settings {
 public:
     // ----- Ecrã (buffer interno da classe Ecra) -----
-    inline static const int ecra_max_linhas = 40;
-    inline static const int ecra_max_colunas = 80;
+    inline static const int ecra_max_linhas = 40; // 40
+    inline static const int ecra_max_colunas = 80; // 80
 
     // ----- Área da fábrica -----
     inline static const int fabrica_max_linhas = 26;

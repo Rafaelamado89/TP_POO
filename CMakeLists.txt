@@ -19,4 +19,5 @@ endif ()
 add_executable(TP_POO
         main.cpp
         Settings.h
+        Ecra.cpp
 )
