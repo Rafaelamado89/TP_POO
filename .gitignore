@@ -1,0 +1,16 @@
+# Compilacao (CLion/CMake)
+cmake-build-*/
+build/
+*.exe
+*.o
+*.obj
+
+# Configuracao local do CLion (cada um tem a sua)
+.idea/
+
+# Zips de entrega: geram-se na altura, nao vivem no repositorio
+*.zip
+
+# Sistema
+.DS_Store
+Thumbs.db

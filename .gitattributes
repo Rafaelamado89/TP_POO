@@ -1,0 +1,3 @@
+# Fins de linha normalizados no repositorio, para nao haver diffs falsos entre maquinas
+* text=auto
+*.pdf binary
