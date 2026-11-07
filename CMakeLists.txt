@@ -21,6 +21,7 @@ add_executable(TP_POO
         Settings.h
         Ecra.cpp
         Item.cpp
+        MateriaPrima.cpp
         ProdutosRefinados.cpp
         MinerioFerro.cpp
         SilicioBruto.cpp

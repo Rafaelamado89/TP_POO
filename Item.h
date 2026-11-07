@@ -2,8 +2,8 @@
 // Created by Rafael on 07/11/2026.
 //
 
-#ifndef ITENS_H
-#define ITENS_H
+#ifndef ITEM_H
+#define ITEM_H
 #include <string>
 
 
@@ -27,4 +27,4 @@ class Item {
 
 
 
-#endif //ITENS_H
+#endif //ITEM_H
