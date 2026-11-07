@@ -35,7 +35,9 @@ private:
 
     int indice(int l, int c) const;
 
-    static int quantidadeInicial(Terreno::Tipo tipo);
+    static int maxLinhas();
+    static int maxColunas();
+    static Terreno criaTerreno(Terreno::Tipo tipo);
     void coloca(Terreno::Tipo tipo, int quantos, const std::vector<int>& posicoes, std::size_t& proxima);
 };
 

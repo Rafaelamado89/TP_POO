@@ -3,16 +3,11 @@
 #include <stdexcept>
 #include <string>
 
-namespace {
-    // Ha 26 letras, por isso cada coordenada vai de 0 ('a') a 25 ('z')
-    const int maiorCoordenada = 'z' - 'a';
-}
-
 Posicao::Posicao() : linha(0), coluna(0) {
 }
 
 Posicao::Posicao(int linha, int coluna) : linha(linha), coluna(coluna) {
-    if (linha < 0 || linha > maiorCoordenada || coluna < 0 || coluna > maiorCoordenada) {
+    if (linha < 0 || linha >= numLetras || coluna < 0 || coluna >= numLetras) {
         throw std::invalid_argument("Posicao: (" + std::to_string(linha) + ", " + std::to_string(coluna) +
                                     ") nao se escreve com duas letras");
     }

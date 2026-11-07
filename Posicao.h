@@ -7,6 +7,9 @@
 // primeiro a linha e depois a coluna ("aa" e o canto superior esquerdo, "ce" e (2, 4)).
 class Posicao {
 public:
+    // Ha 26 letras, por isso cada coordenada vai de 0 ('a') a 25 ('z')
+    inline static const int numLetras = 'z' - 'a' + 1;
+
     Posicao();
     Posicao(int linha, int coluna);
 

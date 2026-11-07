@@ -26,14 +26,23 @@ namespace {
 Fabrica::Fabrica(int nl, int nc) : nLinhas(nl), nColunas(nc) {
     if (!dimensoesValidas(nl, nc)) {
         throw std::invalid_argument("Fabrica: dimensoes invalidas " + std::to_string(nl) + "x" + std::to_string(nc) +
-                                    " (minimo 1x1, maximo " + std::to_string(Settings::fabrica_max_linhas) + "x" +
-                                    std::to_string(Settings::fabrica_max_colunas) + ")");
+                                    " (minimo 1x1, maximo " + std::to_string(maxLinhas()) + "x" +
+                                    std::to_string(maxColunas()) + ")");
     }
     grelha.resize(nl * nc);
 }
 
+// O maximo vem da Settings, mas nunca passa das 26 letras com que se escrevem as posicoes
+int Fabrica::maxLinhas() {
+    return std::min(Settings::fabrica_max_linhas, Posicao::numLetras);
+}
+
+int Fabrica::maxColunas() {
+    return std::min(Settings::fabrica_max_colunas, Posicao::numLetras);
+}
+
 bool Fabrica::dimensoesValidas(int nl, int nc) {
-    return nl >= 1 && nl <= Settings::fabrica_max_linhas && nc >= 1 && nc <= Settings::fabrica_max_colunas;
+    return nl >= 1 && nl <= maxLinhas() && nc >= 1 && nc <= maxColunas();
 }
 
 Fabrica* Fabrica::carrega(const std::string& nomeFicheiro, std::string& erro) {
@@ -59,8 +68,7 @@ Fabrica* Fabrica::carrega(const std::string& nomeFicheiro, std::string& erro) {
     }
     if (!dimensoesValidas(nl, nc)) {
         erro = "Mapa: dimensoes invalidas " + std::to_string(nl) + "x" + std::to_string(nc) +
-               " (minimo 1x1, maximo " + std::to_string(Settings::fabrica_max_linhas) + "x" +
-               std::to_string(Settings::fabrica_max_colunas) + ")";
+               " (minimo 1x1, maximo " + std::to_string(maxLinhas()) + "x" + std::to_string(maxColunas()) + ")";
         return nullptr;
     }
 
@@ -87,7 +95,7 @@ Fabrica* Fabrica::carrega(const std::string& nomeFicheiro, std::string& erro) {
                        ", coluna " + std::to_string(c + 1);
                 return nullptr;
             }
-            fab.grelha[fab.indice(l, c)] = Terreno(tipo, quantidadeInicial(tipo));
+            fab.grelha[fab.indice(l, c)] = criaTerreno(tipo);
         }
     }
 
@@ -171,16 +179,20 @@ void Fabrica::distribuiAleatorio() {
     coloca(Terreno::Tipo::Gelo, Settings::fabrica_num_depositos_gelo, posicoes, proxima);
 }
 
-int Fabrica::quantidadeInicial(Terreno::Tipo tipo) {
+Terreno Fabrica::criaTerreno(Terreno::Tipo tipo) {
     if (!Terreno::eDeposito(tipo)) {
-        return 0;
+        return Terreno(tipo);
     }
-    return Aleatorio::entre(Settings::deposito_quantidade_min, Settings::deposito_quantidade_max);
+    const int qtd = Aleatorio::entre(Settings::deposito_quantidade_min, Settings::deposito_quantidade_max);
+    if (qtd < 1) {
+        return Terreno();   // um deposito que nasce sem nada ja esta esgotado, e um esgotado passa a solo
+    }
+    return Terreno(tipo, qtd);
 }
 
 void Fabrica::coloca(Terreno::Tipo tipo, int quantos, const std::vector<int> &posicoes, std::size_t &proxima) {
     for (int i = 0; i < quantos && proxima < posicoes.size(); ++i) {
-        grelha[posicoes[proxima]] = Terreno(tipo, quantidadeInicial(tipo));
+        grelha[posicoes[proxima]] = criaTerreno(tipo);
         ++proxima;
     }
 }
