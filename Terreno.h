@@ -1,3 +1,7 @@
+//
+// Created by Luis Vieira on 07/11/2026.
+//
+
 #ifndef TERRENO_H
 #define TERRENO_H
 
@@ -5,7 +9,6 @@
 
 
 class Terreno {
-
 public:
     enum class Tipo {
         Solo,
