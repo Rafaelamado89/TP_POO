@@ -34,4 +34,6 @@ add_executable(TP_POO
         SilicioPuro.cpp
         Agua.cpp
         KitHabitat.cpp
+        Aleatorio.cpp
+        Aleatorio.h
 )
