@@ -5,3 +5,6 @@
 #include "Terreno.h"
 
 Terreno::~Terreno() {}
+
+
+MateriaPrima* Terreno::extrai() { return nullptr; }

@@ -16,3 +16,6 @@ std::string Deposito::getDescricao() const {
 }
 
 Terreno* Deposito::clona() const { return new Deposito(*this); }
+
+
+MateriaPrima* Deposito::extrai() { return nullptr; }

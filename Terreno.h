@@ -7,14 +7,18 @@
 
 #include <string>
 
-// Uma posicao da area da fabrica. Cada tipo de terreno (solo, cratera, deposito)
+class MateriaPrima;
+
+
 class Terreno {
 public:
     virtual ~Terreno();
 
-    virtual char getCaracter() const = 0;           // caracter no ecra
-    virtual std::string getDescricao() const = 0;   // texto para o lposicao
-    virtual Terreno* clona() const = 0;             // copia (usada ao copiar a fabrica)
+    virtual char getCaracter() const = 0;
+    virtual std::string getDescricao() const = 0;
+    virtual Terreno* clona() const = 0;
+
+    virtual MateriaPrima* extrai();
 };
 
 #endif //TERRENO_H

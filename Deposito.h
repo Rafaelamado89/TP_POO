@@ -4,7 +4,6 @@
 #include <string>
 #include "Terreno.h"
 
-// Posicao com uma quantidade finita de uma materia-prima (ferro, silicio ou gelo).
 class Deposito : public Terreno {
 public:
 
@@ -13,6 +12,7 @@ public:
     char getCaracter() const override;
     std::string getDescricao() const override;
     Terreno* clona() const override;
+    MateriaPrima* extrai() override;
 
 private:
     char caracter;

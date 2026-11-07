@@ -6,11 +6,13 @@
 class Silo : public Maquina {
 public:
     explicit Silo(Direcao saida);
+    ~Silo();
 
     bool recebe(Item* item) override;
     void atua(Maquina* destino, Terreno* terreno) override;
     bool melhora() override;
     std::string getDescricao() const override;
-};
+
+private:
 
 #endif //SILO_H

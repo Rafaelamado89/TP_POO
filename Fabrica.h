@@ -14,9 +14,8 @@ class Posicao;
 class Fabrica {
 public:
     explicit Fabrica(int nl, int nc);
-    Fabrica(const Fabrica& outra);              // copia profunda (cada terreno e copiado)
-    Fabrica& operator=(const Fabrica&) = delete;
     ~Fabrica();
+    Fabrica(const Fabrica& outra);
 
     static bool dimensoesValidas(int nl, int nc);
     static Fabrica* carrega(const std::string& nomeFicheiro, std::string& erro);

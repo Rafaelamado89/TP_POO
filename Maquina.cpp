@@ -10,10 +10,10 @@ int Maquina::getCusto() const { return custo; }
 Direcao Maquina::getSaida() const { return saida; }
 void Maquina::setSaida(Direcao saida) { this->saida = saida; }
 
-// Por fazer
+
 bool Maquina::melhora() { return false; }
 
-
+//Por implementar
 void Maquina::associa(Engenheiro*) {}
 void Maquina::desassocia(Engenheiro*) {}
-int Maquina::getNumEngenheiros() const {return 0; }
+int Maquina::getNumEngenheiros() const { return 0; }

@@ -1,9 +1,15 @@
 #include "Lancador.h"
+#include "Item.h"
 #include "Settings.h"
 
-Lancador::Lancador(Direcao saida) : Maquina('L', Settings::lancador_custo, saida) {}
+Lancador::Lancador(Direcao saida)
+    : Maquina('L', Settings::lancador_custo, saida), item(nullptr), instantesRestantes(0), probPerda(Settings::lancador_prob_perda) {}
 
-// TODO: comportamento por implementar
+Lancador::~Lancador() {
+    delete item;
+}
+
+// Por implementar
 bool Lancador::recebe(Item*) { return false; }
 void Lancador::atua(Maquina*, Terreno*) {}
 bool Lancador::melhora() { return false; }
