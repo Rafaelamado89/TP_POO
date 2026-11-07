@@ -20,4 +20,14 @@ add_executable(TP_POO
         main.cpp
         Settings.h
         Ecra.cpp
+        Item.cpp
+        ProdutosRefinados.cpp
+        MinerioFerro.cpp
+        SilicioBruto.cpp
+        Gelo.cpp
+        PlacaFerro.cpp
+        SilicioPuro.cpp
+        Agua.cpp
+        KitHabitat.cpp
+
 )

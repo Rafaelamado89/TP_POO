@@ -10,10 +10,11 @@
 class Item {
   public:
     Item(const std::string& nome, char simbolo, int valor);
+    virtual ~Item();
 
     char getSimbolo() const;
     int getValor() const;
-    std::string& getNome() const;
+    const std::string& getNome() const;
 
   virtual Item* clona() const = 0;
 
