@@ -16,7 +16,11 @@ Terreno::Terreno(Tipo t, int qtd) : tipo(t), quantidade(qtd) {
 }
 
 bool Terreno::eDeposito() const {
-    return tipo == Tipo::Ferro || tipo == Tipo::Silicio || tipo == Tipo::Gelo;
+    return eDeposito(tipo);
+}
+
+bool Terreno::eDeposito(Tipo t) {
+    return t == Tipo::Ferro || t == Tipo::Silicio || t == Tipo::Gelo;
 }
 
 char Terreno::getCaracter() const {
@@ -35,21 +39,25 @@ char Terreno::getCaracter() const {
     return '?';
 }
 
-Terreno::Tipo Terreno::tipoDoMapa(char c) {
+bool Terreno::tipoDoMapa(char c, Tipo& resultado) {
     switch (c) {
         case '.':
-            return Tipo::Solo;
+            resultado = Tipo::Solo;
+            return true;
         case '#':
-            return Tipo::Cratera;
+            resultado = Tipo::Cratera;
+            return true;
         case '%':
-            return Tipo::Ferro;
+            resultado = Tipo::Ferro;
+            return true;
         case '$':
-            return Tipo::Silicio;
+            resultado = Tipo::Silicio;
+            return true;
         case '~':
-            return Tipo::Gelo;
+            resultado = Tipo::Gelo;
+            return true;
         default:
-            throw std::invalid_argument(std::string("Mapa: caracter invalido '") + c +
-                                        "' (codigo " + std::to_string(static_cast<int>(c)) + ")");
+            return false;
     }
 }
 

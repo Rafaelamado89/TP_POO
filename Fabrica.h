@@ -5,12 +5,16 @@
 #ifndef FABRICA_H
 #define FABRICA_H
 
+#include <string>
 #include <vector>
 #include "Terreno.h"
 
 class Fabrica {
 public:
     explicit Fabrica(int nl, int nc);
+
+    static bool dimensoesValidas(int nl, int nc);
+    static Fabrica* carrega(const std::string& nomeFicheiro, std::string& erro);
 
     int getLinhas() const;
     int getColunas() const;
@@ -25,6 +29,7 @@ private:
 
     int indice(int l, int c) const;
 
+    static int quantidadeInicial(Terreno::Tipo tipo);
     void coloca(Terreno::Tipo tipo, int quantos, const std::vector<int>& posicoes, std::size_t& proxima);
 };
 

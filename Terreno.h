@@ -22,8 +22,9 @@ public:
     explicit Terreno(Tipo t, int qtd = 0);
 
     bool eDeposito() const;
+    static bool eDeposito(Tipo t);
     char getCaracter() const;
-    static Tipo tipoDoMapa(char c);
+    static bool tipoDoMapa(char c, Tipo& resultado);
     std::string getDescricao() const;
 
 private:
