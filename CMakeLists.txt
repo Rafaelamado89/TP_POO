@@ -22,4 +22,6 @@ add_executable(TP_POO
         Ecra.cpp
         Terreno.h
         Terreno.cpp
+        Fabrica.cpp
+        Fabrica.h
 )
