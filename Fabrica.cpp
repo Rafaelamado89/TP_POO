@@ -207,8 +207,9 @@ Terreno* Fabrica::criaTerreno(char caracter) {
 void Fabrica::distribuiAleatorio() {
     // Recomeca tudo em solo
     for (std::size_t i = 0; i < grelha.size(); ++i) {
+        Terreno* solo = new Solo();   // a mesma regra: criar primeiro, apagar depois
         delete grelha[i];
-        grelha[i] = new Solo();
+        grelha[i] = solo;
     }
 
     int livres = nLinhas * nColunas;   // posicoes ainda em solo
@@ -226,8 +227,10 @@ void Fabrica::coloca(char caracter, int quantos, int& livres) {
             pos = Aleatorio::entre(0, nLinhas * nColunas - 1);
         } while (grelha[pos]->getCaracter() != ' ');
 
+        // Cria primeiro e so depois apaga: se o criaTerreno lancar uma excecao, a grelha fica como estava
+        Terreno* novo = criaTerreno(caracter);
         delete grelha[pos];
-        grelha[pos] = criaTerreno(caracter);
+        grelha[pos] = novo;
         if (grelha[pos]->getCaracter() != ' ') {
             --livres;   // so conta se a posicao deixou de ser solo
         }
