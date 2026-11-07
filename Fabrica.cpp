@@ -11,6 +11,7 @@
 #include <stdexcept>
 #include <string>
 #include "Aleatorio.h"
+#include "Posicao.h"
 #include "Settings.h"
 
 namespace {
@@ -121,6 +122,39 @@ int Fabrica::indice(int l, int c) const {
 
 char Fabrica::getCaracter(int l, int c) const {
     return grelha[indice(l, c)].getCaracter();
+}
+
+bool Fabrica::contem(const Posicao& p) const {
+    return p.getLinha() >= 0 && p.getLinha() < nLinhas && p.getColuna() >= 0 && p.getColuna() < nColunas;
+}
+
+std::string Fabrica::descricaoPosicao(const Posicao& p) const {
+    return p.getTexto() + ": " + grelha[indice(p.getLinha(), p.getColuna())].getDescricao();
+}
+
+std::string Fabrica::descricaoArea(const Posicao& centro, int raio) const {
+    if (raio < 0) {
+        throw std::invalid_argument("Fabrica: raio negativo (" + std::to_string(raio) + ")");
+    }
+    if (!contem(centro)) {
+        throw std::out_of_range("Fabrica: posicao " + centro.getTexto() + " fora da grelha " +
+                                std::to_string(nLinhas) + "x" + std::to_string(nColunas));
+    }
+    raio = std::min(raio, std::max(nLinhas, nColunas));   // um raio maior nao mostra mais nada
+
+    // O quadrado de raio n a volta do centro, cortado nos limites da grelha
+    const int linhaIni = std::max(0, centro.getLinha() - raio);
+    const int linhaFim = std::min(nLinhas - 1, centro.getLinha() + raio);
+    const int colunaIni = std::max(0, centro.getColuna() - raio);
+    const int colunaFim = std::min(nColunas - 1, centro.getColuna() + raio);
+
+    std::ostringstream texto;
+    for (int l = linhaIni; l <= linhaFim; ++l) {
+        for (int c = colunaIni; c <= colunaFim; ++c) {
+            texto << descricaoPosicao(Posicao(l, c)) << '\n';
+        }
+    }
+    return texto.str();
 }
 
 void Fabrica::distribuiAleatorio() {

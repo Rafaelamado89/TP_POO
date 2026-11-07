@@ -9,6 +9,8 @@
 #include <vector>
 #include "Terreno.h"
 
+class Posicao;
+
 class Fabrica {
 public:
     explicit Fabrica(int nl, int nc);
@@ -19,6 +21,10 @@ public:
     int getLinhas() const;
     int getColunas() const;
     char getCaracter(int l, int c) const;
+
+    bool contem(const Posicao& p) const;
+    std::string descricaoPosicao(const Posicao& p) const;
+    std::string descricaoArea(const Posicao& centro, int raio) const;
 
     void distribuiAleatorio();
 

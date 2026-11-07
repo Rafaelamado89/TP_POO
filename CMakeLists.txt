@@ -36,4 +36,6 @@ add_executable(TP_POO
         KitHabitat.cpp
         Aleatorio.cpp
         Aleatorio.h
+        Posicao.h
+        Posicao.cpp
 )
