@@ -44,4 +44,6 @@ add_executable(TP_POO
         Aleatorio.h
         Posicao.h
         Posicao.cpp
+        Vista.h
+        Vista.cpp
 )
