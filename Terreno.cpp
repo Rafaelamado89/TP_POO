@@ -1,5 +1,6 @@
 #include "Terreno.h"
 #include <stdexcept>
+#include <string>
 
 Terreno::Terreno() : tipo(Tipo::Solo), quantidade(0) {
 }
@@ -32,4 +33,41 @@ char Terreno::getCaracter() const {
             return '~';
     }
     return '?';
+}
+
+Terreno::Tipo Terreno::tipoDoMapa(char c) {
+
+    switch (c) {
+
+        case '.':
+            return Tipo::Solo;
+        case '#':
+            return Tipo::Cratera;
+        case '%':
+            return Tipo::Ferro;
+        case '$':
+            return Tipo::Silicio;
+        case '~':
+            return Tipo::Gelo;
+        default:
+            throw std::invalid_argument(std::string("Mapa: caracter invalido '") + c + "' (codigo " + std::to_string(static_cast<int>(c)) + ")");
+    }
+}
+
+std::string Terreno::getDescricao() const {
+
+    switch (tipo) {
+
+        case Tipo::Solo:
+            return "Solo";
+        case Tipo::Cratera:
+            return "Cratera";
+        case Tipo::Ferro:
+            return "Deposito de ferro ("+ std::to_string(quantidade) + (quantidade == 1 ? " unidade)" : " unidades)");
+        case Tipo::Silicio:
+            return "Deposito de silicio ("+ std::to_string(quantidade) + (quantidade == 1 ? " unidade)" : " unidades)");
+        case Tipo::Gelo:
+            return "Deposito de gelo ("+ std::to_string(quantidade) + (quantidade == 1 ? " unidade)" : " unidades)");
+    }
+    return "Desconhecido";
 }
