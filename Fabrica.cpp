@@ -11,6 +11,9 @@
 #include <stdexcept>
 #include <string>
 #include "Aleatorio.h"
+#include "Solo.h"
+#include "Cratera.h"
+#include "Deposito.h"
 #include "Posicao.h"
 #include "Settings.h"
 
@@ -29,16 +32,33 @@ Fabrica::Fabrica(int nl, int nc) : nLinhas(nl), nColunas(nc) {
                                     " (minimo 1x1, maximo " + std::to_string(maxLinhas()) + "x" +
                                     std::to_string(maxColunas()) + ")");
     }
-    grelha.resize(nl * nc);
+    for (int i = 0; i < nl * nc; ++i) {
+        grelha.push_back(new Solo());
+    }
 }
 
-// O maximo vem da Settings, mas nunca passa das 26 letras com que se escrevem as posicoes
+Fabrica::Fabrica(const Fabrica& outra) : nLinhas(outra.nLinhas), nColunas(outra.nColunas) {
+    for (const Terreno* t : outra.grelha) {
+        grelha.push_back(t->clona());
+    }
+}
+
+Fabrica::~Fabrica() {
+    for (Terreno* t : grelha) {
+        delete t;
+    }
+}
+
 int Fabrica::maxLinhas() {
-    return std::min(Settings::fabrica_max_linhas, Posicao::numLetras);
+    if (Settings::fabrica_max_linhas < Posicao::numLetras)
+        return Settings::fabrica_max_linhas;
+    return Posicao::numLetras;
 }
 
 int Fabrica::maxColunas() {
-    return std::min(Settings::fabrica_max_colunas, Posicao::numLetras);
+    if (Settings::fabrica_max_colunas < Posicao::numLetras)
+        return Settings::fabrica_max_colunas;
+    return Posicao::numLetras;
 }
 
 bool Fabrica::dimensoesValidas(int nl, int nc) {
@@ -88,14 +108,13 @@ Fabrica* Fabrica::carrega(const std::string& nomeFicheiro, std::string& erro) {
         }
         for (int c = 0; c < nc; ++c) {
             const char ch = linha[static_cast<std::size_t>(c)];
-            Terreno::Tipo tipo = Terreno::Tipo::Solo;
-            if (!Terreno::tipoDoMapa(ch, tipo)) {
-                erro = std::string("Mapa: caracter invalido '") + ch + "' (codigo " +
-                       std::to_string(static_cast<int>(ch)) + ") na linha " + std::to_string(linhaFicheiro) +
-                       ", coluna " + std::to_string(c + 1);
+            Terreno* t = criaTerreno(ch);
+            if (t == nullptr) {
+                erro = "Mapa: caracter invalido";          // caracter invalido
                 return nullptr;
             }
-            fab.grelha[fab.indice(l, c)] = criaTerreno(tipo);
+            delete fab.grelha[fab.indice(l, c)];
+            fab.grelha[fab.indice(l, c)] = t;
         }
     }
 
@@ -129,7 +148,7 @@ int Fabrica::indice(int l, int c) const {
 }
 
 char Fabrica::getCaracter(int l, int c) const {
-    return grelha[indice(l, c)].getCaracter();
+    return grelha[indice(l, c)]->getCaracter();
 }
 
 bool Fabrica::contem(const Posicao& p) const {
@@ -137,7 +156,7 @@ bool Fabrica::contem(const Posicao& p) const {
 }
 
 std::string Fabrica::descricaoPosicao(const Posicao& p) const {
-    return p.getTexto() + ": " + grelha[indice(p.getLinha(), p.getColuna())].getDescricao();
+    return p.getTexto() + ": " + grelha[indice(p.getLinha(), p.getColuna())]->getDescricao();
 }
 
 std::string Fabrica::descricaoArea(const Posicao& centro, int raio) const {
@@ -165,34 +184,60 @@ std::string Fabrica::descricaoArea(const Posicao& centro, int raio) const {
     return texto.str();
 }
 
-void Fabrica::distribuiAleatorio() {
-    grelha.assign(grelha.size(), Terreno());          // recomeça tudo em solo
 
-    std::vector<int> posicoes(grelha.size());
-    std::iota(posicoes.begin(), posicoes.end(), 0);   // 0, 1, 2, ..., nl*nc-1
-    std::shuffle(posicoes.begin(), posicoes.end(), Aleatorio::gerador());
 
-    std::size_t proxima = 0;
-    coloca(Terreno::Tipo::Cratera, Settings::fabrica_num_crateras, posicoes, proxima);
-    coloca(Terreno::Tipo::Ferro, Settings::fabrica_num_depositos_ferro, posicoes, proxima);
-    coloca(Terreno::Tipo::Silicio, Settings::fabrica_num_depositos_silicio, posicoes, proxima);
-    coloca(Terreno::Tipo::Gelo, Settings::fabrica_num_depositos_gelo, posicoes, proxima);
-}
-
-Terreno Fabrica::criaTerreno(Terreno::Tipo tipo) {
-    if (!Terreno::eDeposito(tipo)) {
-        return Terreno(tipo);
+Terreno* Fabrica::criaTerreno(char caracter) {
+    std::string nome;
+    switch (caracter) {
+        case '.':
+            return new Solo();
+        case '#':
+            return new Cratera();
+        case '%':
+            nome = "ferro";
+            break;
+        case '$':
+            nome = "silicio";
+            break;
+        case '~':
+            nome = "gelo";
+            break;
+        default:
+            return nullptr;
     }
     const int qtd = Aleatorio::entre(Settings::deposito_quantidade_min, Settings::deposito_quantidade_max);
     if (qtd < 1) {
-        return Terreno();   // um deposito que nasce sem nada ja esta esgotado, e um esgotado passa a solo
+        return new Solo();   // um deposito que nasce sem nada ja esta esgotado, e um esgotado passa a solo
     }
-    return Terreno(tipo, qtd);
+    return new Deposito(caracter, nome, qtd);
 }
 
-void Fabrica::coloca(Terreno::Tipo tipo, int quantos, const std::vector<int> &posicoes, std::size_t &proxima) {
-    for (int i = 0; i < quantos && proxima < posicoes.size(); ++i) {
-        grelha[posicoes[proxima]] = criaTerreno(tipo);
-        ++proxima;
+void Fabrica::distribuiAleatorio() {
+    // Recomeca tudo em solo
+    for (std::size_t i = 0; i < grelha.size(); ++i) {
+        delete grelha[i];
+        grelha[i] = new Solo();
+    }
+
+    int livres = nLinhas * nColunas;   // posicoes ainda em solo
+    coloca('#', Settings::fabrica_num_crateras, livres);
+    coloca('%', Settings::fabrica_num_depositos_ferro, livres);
+    coloca('$', Settings::fabrica_num_depositos_silicio, livres);
+    coloca('~', Settings::fabrica_num_depositos_gelo, livres);
+}
+
+void Fabrica::coloca(char caracter, int quantos, int& livres) {
+    for (int i = 0; i < quantos && livres > 0; ++i) {
+        // Sorteia posicoes ate encontrar uma que ainda seja solo (' ')
+        int pos;
+        do {
+            pos = Aleatorio::entre(0, nLinhas * nColunas - 1);
+        } while (grelha[pos]->getCaracter() != ' ');
+
+        delete grelha[pos];
+        grelha[pos] = criaTerreno(caracter);
+        if (grelha[pos]->getCaracter() != ' ') {
+            --livres;   // so conta se a posicao deixou de ser solo
+        }
     }
 }

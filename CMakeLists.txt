@@ -22,6 +22,12 @@ add_executable(TP_POO
         Ecra.cpp
         Terreno.h
         Terreno.cpp
+        Solo.h
+        Solo.cpp
+        Cratera.h
+        Cratera.cpp
+        Deposito.h
+        Deposito.cpp
         Fabrica.cpp
         Fabrica.h
         Item.cpp

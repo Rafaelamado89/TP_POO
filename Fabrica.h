@@ -14,6 +14,9 @@ class Posicao;
 class Fabrica {
 public:
     explicit Fabrica(int nl, int nc);
+    Fabrica(const Fabrica& outra);              // copia profunda (cada terreno e copiado)
+    Fabrica& operator=(const Fabrica&) = delete;
+    ~Fabrica();
 
     static bool dimensoesValidas(int nl, int nc);
     static Fabrica* carrega(const std::string& nomeFicheiro, std::string& erro);
@@ -31,14 +34,15 @@ public:
 private:
     int nLinhas;
     int nColunas;
-    std::vector<Terreno> grelha;
+    std::vector<Terreno*> grelha;   // um ponteiro por posicao (a fabrica e a dona)
 
     int indice(int l, int c) const;
 
     static int maxLinhas();
     static int maxColunas();
-    static Terreno criaTerreno(Terreno::Tipo tipo);
-    void coloca(Terreno::Tipo tipo, int quantos, const std::vector<int>& posicoes, std::size_t& proxima);
+    // Cria o terreno que corresponde ao caracter do mapa ('.', '#', '%', '$', '~'); nullptr se for invalido
+    static Terreno* criaTerreno(char caracter);
+    void coloca(char caracter, int quantos, int& livres);
 };
 
 

@@ -7,30 +7,14 @@
 
 #include <string>
 
-
+// Uma posicao da area da fabrica. Cada tipo de terreno (solo, cratera, deposito)
 class Terreno {
 public:
-    enum class Tipo {
-        Solo,
-        Cratera,
-        Ferro,
-        Silicio,
-        Gelo
-    };
+    virtual ~Terreno();
 
-    Terreno();
-    explicit Terreno(Tipo t, int qtd = 0);
-
-    bool eDeposito() const;
-    static bool eDeposito(Tipo t);
-    char getCaracter() const;
-    static bool tipoDoMapa(char c, Tipo& resultado);
-    std::string getDescricao() const;
-
-private:
-    Tipo tipo;
-    int quantidade;
+    virtual char getCaracter() const = 0;           // caracter no ecra
+    virtual std::string getDescricao() const = 0;   // texto para o lposicao
+    virtual Terreno* clona() const = 0;             // copia (usada ao copiar a fabrica)
 };
-
 
 #endif //TERRENO_H
