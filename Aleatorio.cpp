@@ -14,9 +14,7 @@ std::mt19937 &Aleatorio::gerador() {
 
 int Aleatorio::entre(int min, int max) {
     if (min > max) {
-        throw std::invalid_argument(
-            "Aleatorio: intervalo invalido [" + std::to_string(min) + ", " + std::to_string(max) +
-            "] (o minimo e maior que o maximo)");
+        throw std::invalid_argument("Aleatorio: intervalo invalido");
     }
     std::uniform_int_distribution<int> d(min, max);
     return d(gerador());

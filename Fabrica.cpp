@@ -6,7 +6,6 @@
 
 #include <algorithm>
 #include <fstream>
-#include <numeric>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -28,9 +27,7 @@ namespace {
 
 Fabrica::Fabrica(int nl, int nc) : nLinhas(nl), nColunas(nc) {
     if (!dimensoesValidas(nl, nc)) {
-        throw std::invalid_argument("Fabrica: dimensoes invalidas " + std::to_string(nl) + "x" + std::to_string(nc) +
-                                    " (minimo 1x1, maximo " + std::to_string(maxLinhas()) + "x" +
-                                    std::to_string(maxColunas()) + ")");
+        throw std::invalid_argument("Fabrica: dimensoes invalidas");
     }
     for (int i = 0; i < nl * nc; ++i) {
         grelha.push_back(new Solo());
@@ -68,7 +65,7 @@ bool Fabrica::dimensoesValidas(int nl, int nc) {
 Fabrica* Fabrica::carrega(const std::string& nomeFicheiro, std::string& erro) {
     std::ifstream ficheiro(nomeFicheiro);
     if (!ficheiro) {
-        erro = "Mapa: nao foi possivel abrir o ficheiro '" + nomeFicheiro + "'";
+        erro = "Mapa: nao foi possivel abrir o ficheiro";
         return nullptr;
     }
 
@@ -83,34 +80,32 @@ Fabrica* Fabrica::carrega(const std::string& nomeFicheiro, std::string& erro) {
     int nl = 0, nc = 0;
     std::string resto;
     if (!(dimensoes >> nl >> nc) || (dimensoes >> resto)) {
-        erro = "Mapa: a primeira linha deve ter apenas o numero de linhas e o numero de colunas";
+        erro = "Mapa: primeira linha invalida";
         return nullptr;
     }
     if (!dimensoesValidas(nl, nc)) {
-        erro = "Mapa: dimensoes invalidas " + std::to_string(nl) + "x" + std::to_string(nc) +
-               " (minimo 1x1, maximo " + std::to_string(maxLinhas()) + "x" + std::to_string(maxColunas()) + ")";
+        erro = "Mapa: dimensoes invalidas";
         return nullptr;
     }
 
     // A fabrica e montada num objeto local: se o ficheiro falhar a meio, nada fica criado
     Fabrica fab(nl, nc);
     for (int l = 0; l < nl; ++l) {
-        const int linhaFicheiro = l + 2;
         if (!std::getline(ficheiro, linha)) {
-            erro = "Mapa: faltam linhas (indicadas " + std::to_string(nl) + ", encontradas " + std::to_string(l) + ")";
+            erro = "Mapa: faltam linhas";
             return nullptr;
         }
         tiraFimDeLinhaWindows(linha);
-        if (linha.size() != static_cast<std::size_t>(nc)) {
-            erro = "Mapa: a linha " + std::to_string(linhaFicheiro) + " tem " + std::to_string(linha.size()) +
-                   " caracteres em vez de " + std::to_string(nc);
+        int tamanho = linha.size();
+        if (tamanho != nc) {
+            erro = "Mapa: linha com tamanho errado";
             return nullptr;
         }
         for (int c = 0; c < nc; ++c) {
-            const char ch = linha[static_cast<std::size_t>(c)];
+            const char ch = linha[c];
             Terreno* t = criaTerreno(ch);
             if (t == nullptr) {
-                erro = "Mapa: caracter invalido";          // caracter invalido
+                erro = "Mapa: caracter invalido";
                 return nullptr;
             }
             delete fab.grelha[fab.indice(l, c)];
@@ -122,7 +117,7 @@ Fabrica* Fabrica::carrega(const std::string& nomeFicheiro, std::string& erro) {
     while (std::getline(ficheiro, linha)) {
         tiraFimDeLinhaWindows(linha);
         if (!linha.empty()) {
-            erro = "Mapa: o ficheiro tem mais linhas do que as " + std::to_string(nl) + " indicadas";
+            erro = "Mapa: o ficheiro tem linhas a mais";
             return nullptr;
         }
     }
@@ -140,9 +135,7 @@ int Fabrica::getColunas() const {
 
 int Fabrica::indice(int l, int c) const {
     if (l < 0 || l >= nLinhas || c < 0 || c >= nColunas) {
-        throw std::out_of_range(
-            "Fabrica: posicao (" + std::to_string(l) + ", " + std::to_string(c) + ") fora da grelha " +
-            std::to_string(nLinhas) + "x" + std::to_string(nColunas));
+        throw std::out_of_range("Fabrica: posicao fora da grelha");
     }
     return l * nColunas + c;
 }
@@ -161,11 +154,10 @@ std::string Fabrica::descricaoPosicao(const Posicao& p) const {
 
 std::string Fabrica::descricaoArea(const Posicao& centro, int raio) const {
     if (raio < 0) {
-        throw std::invalid_argument("Fabrica: raio negativo (" + std::to_string(raio) + ")");
+        throw std::invalid_argument("Fabrica: raio negativo");
     }
     if (!contem(centro)) {
-        throw std::out_of_range("Fabrica: posicao " + centro.getTexto() + " fora da grelha " +
-                                std::to_string(nLinhas) + "x" + std::to_string(nColunas));
+        throw std::out_of_range("Fabrica: posicao fora da grelha");
     }
     raio = std::min(raio, std::max(nLinhas, nColunas));   // um raio maior nao mostra mais nada
 

@@ -8,8 +8,7 @@ Posicao::Posicao() : linha(0), coluna(0) {
 
 Posicao::Posicao(int linha, int coluna) : linha(linha), coluna(coluna) {
     if (linha < 0 || linha >= numLetras || coluna < 0 || coluna >= numLetras) {
-        throw std::invalid_argument("Posicao: (" + std::to_string(linha) + ", " + std::to_string(coluna) +
-                                    ") nao se escreve com duas letras");
+        throw std::invalid_argument("Posicao: invalida");
     }
 }
 
