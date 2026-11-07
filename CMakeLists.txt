@@ -24,4 +24,14 @@ add_executable(TP_POO
         Terreno.cpp
         Fabrica.cpp
         Fabrica.h
+        Item.cpp
+        MateriaPrima.cpp
+        ProdutosRefinados.cpp
+        MinerioFerro.cpp
+        SilicioBruto.cpp
+        Gelo.cpp
+        PlacaFerro.cpp
+        SilicioPuro.cpp
+        Agua.cpp
+        KitHabitat.cpp
 )
