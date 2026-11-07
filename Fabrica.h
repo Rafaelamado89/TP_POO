@@ -16,12 +16,16 @@ public:
     int getColunas() const;
     char getCaracter(int l, int c) const;
 
+    void distribuiAleatorio();
+
 private:
     int nLinhas;
     int nColunas;
     std::vector<Terreno> grelha;
 
     int indice(int l, int c) const;
+
+    void coloca(Terreno::Tipo tipo, int quantos, const std::vector<int>& posicoes, std::size_t& proxima);
 };
 
 

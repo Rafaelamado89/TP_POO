@@ -3,9 +3,14 @@
 //
 
 #include "Fabrica.h"
+
+#include <algorithm>
+#include <numeric>
 #include <stdexcept>
 #include "Settings.h"
 #include <string>
+#include "Aleatorio.h"
+#include <numeric>
 
 Fabrica::Fabrica(int nl, int nc) : nLinhas(nl), nColunas(nc) {
     if (nl > Settings::fabrica_max_linhas || nc > Settings::fabrica_max_colunas || nl < 1 || nc < 1) {
@@ -35,4 +40,29 @@ int Fabrica::indice(int l, int c) const {
 
 char Fabrica::getCaracter(int l, int c) const {
     return grelha[indice(l, c)].getCaracter();
+}
+
+void Fabrica::distribuiAleatorio() {
+    grelha.assign(grelha.size(), Terreno());          // recomeça tudo em solo
+
+    std::vector<int> posicoes(grelha.size());
+    std::iota(posicoes.begin(), posicoes.end(), 0);   // 0, 1, 2, ..., nl*nc-1
+    std::shuffle(posicoes.begin(), posicoes.end(), Aleatorio::gerador());
+
+    std::size_t proxima = 0;
+    coloca(Terreno::Tipo::Cratera, Settings::fabrica_num_crateras, posicoes, proxima);
+    coloca(Terreno::Tipo::Ferro, Settings::fabrica_num_depositos_ferro, posicoes, proxima);
+    coloca(Terreno::Tipo::Silicio, Settings::fabrica_num_depositos_silicio, posicoes, proxima);
+    coloca(Terreno::Tipo::Gelo, Settings::fabrica_num_depositos_gelo, posicoes, proxima);
+}
+
+void Fabrica::coloca(Terreno::Tipo tipo, int quantos, const std::vector<int> &posicoes, std::size_t &proxima) {
+    for (int i = 0; i < quantos && proxima < posicoes.size(); ++i) {
+        int qtd = 0;
+        if (tipo != Terreno::Tipo::Cratera) {
+            qtd = Aleatorio::entre(Settings::deposito_quantidade_min, Settings::deposito_quantidade_max);
+        }
+        grelha[posicoes[proxima]] = Terreno(tipo, qtd);
+        ++proxima;
+    }
 }
