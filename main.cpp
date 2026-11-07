@@ -47,7 +47,7 @@ int main() {
 
     try {
         // 1) O que o comando "fabrica <nl> <nc>" vai fazer: as dimensoes dadas, crateras e depositos ao acaso
-        const int nl = 8, nc = 20;
+        const int nl = 8 nc = 20;
         std::cout << "> fabrica " << nl << ' ' << nc << '\n';
         aleatoria = new Fabrica(nl, nc);
         aleatoria->distribuiAleatorio();
