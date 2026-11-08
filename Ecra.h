@@ -23,8 +23,6 @@ class Ecra {
       void escreve(int linha, int coluna, char c);
       void escreve(int linha, int coluna, const std::string& texto);
 
-    void regua(int linha, int coluna, int linhasGrelha, int colunasGrelha);
-
 private:
     static const int MAX_LINHAS = Settings::ecra_max_linhas;
     static const int MAX_COLUNAS = Settings::ecra_max_colunas;
@@ -36,10 +34,6 @@ private:
 
     int cursorL;
     int cursorC;
-
-
-
-
 };
 
 

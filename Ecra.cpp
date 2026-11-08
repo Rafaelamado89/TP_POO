@@ -98,17 +98,3 @@ void Ecra::moldura(int linha, int coluna, int altura, int largura) {
   posiciona(ultL, ultC);
   escreve('+');
 }
-
-
-void Ecra::regua(int linha, int coluna, int nLinhas, int nColunas) {
-  // regua horizontal
-  posiciona(linha, coluna + 1);
-  for (int j = 0; j < nColunas; j++)
-    escreve(char('A' + (j % 26)));
-
-  // regua vertical
-  for (int i = 0; i < nLinhas; i++) {
-    posiciona(linha + 1 + i, coluna);
-    escreve(char('A' + (i % 26)));
-  }
-}
