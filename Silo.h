@@ -14,6 +14,9 @@ public:
     std::string getDescricao() const override;
 
 private:
+  Item** itens;
+  int numItens;
+  int probPerda;
 };
 
 #endif //SILO_H
