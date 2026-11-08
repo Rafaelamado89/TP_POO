@@ -14,5 +14,6 @@ public:
     std::string getDescricao() const override;
 
 private:
+}
 
 #endif //SILO_H

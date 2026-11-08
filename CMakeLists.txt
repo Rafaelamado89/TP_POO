@@ -6,6 +6,13 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+
+file(GLOB TXT_FILES "${CMAKE_SOURCE_DIR}/*.txt")
+foreach(TXT_FILE ${TXT_FILES})
+    get_filename_component(FILENAME ${TXT_FILE} NAME)
+    configure_file(${TXT_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${FILENAME} COPYONLY)
+endforeach()
+
 # O programa tem de compilar sem qualquer warning: ligamos os avisos todos
 # para os ver durante o desenvolvimento, e nao so na entrega.
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
