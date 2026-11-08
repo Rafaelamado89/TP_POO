@@ -26,6 +26,7 @@ endif ()
 add_executable(TP_POO
         main.cpp
         Settings.h
+        Ecra.h
         Ecra.cpp
         Terreno.h
         Terreno.cpp
@@ -35,22 +36,53 @@ add_executable(TP_POO
         Cratera.cpp
         Deposito.h
         Deposito.cpp
-        Fabrica.cpp
         Fabrica.h
-        Item.cpp
-        MateriaPrima.cpp
-        ProdutosRefinados.cpp
-        MinerioFerro.cpp
-        SilicioBruto.cpp
-        Gelo.cpp
-        PlacaFerro.cpp
-        SilicioPuro.cpp
-        Agua.cpp
-        KitHabitat.cpp
-        Aleatorio.cpp
+        Fabrica.cpp
         Aleatorio.h
+        Aleatorio.cpp
         Posicao.h
         Posicao.cpp
         Vista.h
         Vista.cpp
+
+        Item.h
+        Item.cpp
+        MateriaPrima.h
+        MateriaPrima.cpp
+        ProdutosRefinados.h
+        ProdutosRefinados.cpp
+        MinerioFerro.h
+        MinerioFerro.cpp
+        SilicioBruto.h
+        SilicioBruto.cpp
+        Gelo.h
+        Gelo.cpp
+        PlacaFerro.h
+        PlacaFerro.cpp
+        SilicioPuro.h
+        SilicioPuro.cpp
+        Agua.h
+        Agua.cpp
+        KitHabitat.h
+        KitHabitat.cpp
+
+        Direcao.h
+        Maquina.h
+        Maquina.cpp
+        Perfuradora.h
+        Perfuradora.cpp
+        Transportador.h
+        Transportador.cpp
+        Refinaria.h
+        Refinaria.cpp
+        Oficina.h
+        Oficina.cpp
+        Silo.h
+        Silo.cpp
+        Lancador.h
+        Lancador.cpp
+        Engenheiro.h
+        Engenheiro.cpp
+        Comando.h
+        Comando.cpp
 )
