@@ -3,7 +3,8 @@
 #include "Settings.h"
 
 Silo::Silo(Direcao saida)
-    : Maquina('S', Settings::silo_custo, saida) {}
+    : Maquina('S', Settings::silo_custo, saida),
+      itens(nullptr), numItens(0), probPerda(Settings::silo_prob_perda) {}
 
 Silo::~Silo() {}
 
