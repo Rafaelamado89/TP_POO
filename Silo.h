@@ -17,6 +17,7 @@ private:
   Item** itens;
   int numItens;
   int probPerda;
+  
 };
 
 #endif //SILO_H
