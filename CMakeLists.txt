@@ -6,8 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-
-file(GLOB TXT_FILES "${CMAKE_SOURCE_DIR}/*.txt")
+# Os ficheiros de dados (mapas, ficheiros de teste do executa) vao para a pasta do executavel,
+# para que "carrega mapa1.txt" e "executa teste1.txt" funcionem a partir dela.
+file(GLOB TXT_FILES "${CMAKE_SOURCE_DIR}/dados/*.txt")
 foreach(TXT_FILE ${TXT_FILES})
     get_filename_component(FILENAME ${TXT_FILE} NAME)
     configure_file(${TXT_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${FILENAME} COPYONLY)
@@ -21,68 +22,80 @@ elseif (MSVC)
     add_compile_options(/W4)
 endif ()
 
-# Cada classe nova (.h e .cpp) entra nesta lista.
-# O "New > C++ Class" do CLion acrescenta-a sozinho.
+# Cada classe nova (.h e .cpp) entra nesta lista, na pasta do seu tema.
 add_executable(TP_POO
         main.cpp
         Settings.h
-        Ecra.h
-        Ecra.cpp
-        Terreno.h
-        Terreno.cpp
-        Solo.h
-        Solo.cpp
-        Cratera.h
-        Cratera.cpp
-        Deposito.h
-        Deposito.cpp
-        Fabrica.h
-        Fabrica.cpp
-        Aleatorio.h
-        Aleatorio.cpp
-        Posicao.h
-        Posicao.cpp
-        Vista.h
-        Vista.cpp
 
-        Item.h
-        Item.cpp
-        MateriaPrima.h
-        MateriaPrima.cpp
-        ProdutosRefinados.h
-        ProdutosRefinados.cpp
-        MinerioFerro.h
-        MinerioFerro.cpp
-        SilicioBruto.h
-        SilicioBruto.cpp
-        Gelo.h
-        Gelo.cpp
-        PlacaFerro.h
-        PlacaFerro.cpp
-        SilicioPuro.h
-        SilicioPuro.cpp
-        Agua.h
-        Agua.cpp
-        KitHabitat.h
-        KitHabitat.cpp
+        interface/Ecra.h
+        interface/Ecra.cpp
+        interface/Vista.h
+        interface/Vista.cpp
 
-        Direcao.h
-        Maquina.h
-        Maquina.cpp
-        Perfuradora.h
-        Perfuradora.cpp
-        Transportador.h
-        Transportador.cpp
-        Refinaria.h
-        Refinaria.cpp
-        Oficina.h
-        Oficina.cpp
-        Silo.h
-        Silo.cpp
-        Lancador.h
-        Lancador.cpp
-        Engenheiro.h
-        Engenheiro.cpp
-        Comando.h
-        Comando.cpp
+        comandos/Comando.h
+        comandos/Comando.cpp
+
+        fabrica/Fabrica.h
+        fabrica/Fabrica.cpp
+        fabrica/Terreno.h
+        fabrica/Terreno.cpp
+        fabrica/Solo.h
+        fabrica/Solo.cpp
+        fabrica/Cratera.h
+        fabrica/Cratera.cpp
+        fabrica/Deposito.h
+        fabrica/Deposito.cpp
+        fabrica/Posicao.h
+        fabrica/Posicao.cpp
+        fabrica/Aleatorio.h
+        fabrica/Aleatorio.cpp
+        fabrica/Engenheiro.h
+        fabrica/Engenheiro.cpp
+
+        maquinas/Direcao.h
+        maquinas/Maquina.h
+        maquinas/Maquina.cpp
+        maquinas/Perfuradora.h
+        maquinas/Perfuradora.cpp
+        maquinas/Transportador.h
+        maquinas/Transportador.cpp
+        maquinas/Refinaria.h
+        maquinas/Refinaria.cpp
+        maquinas/Oficina.h
+        maquinas/Oficina.cpp
+        maquinas/Silo.h
+        maquinas/Silo.cpp
+        maquinas/Lancador.h
+        maquinas/Lancador.cpp
+
+        itens/Item.h
+        itens/Item.cpp
+        itens/MateriaPrima.h
+        itens/MateriaPrima.cpp
+        itens/ProdutosRefinados.h
+        itens/ProdutosRefinados.cpp
+        itens/MinerioFerro.h
+        itens/MinerioFerro.cpp
+        itens/SilicioBruto.h
+        itens/SilicioBruto.cpp
+        itens/Gelo.h
+        itens/Gelo.cpp
+        itens/PlacaFerro.h
+        itens/PlacaFerro.cpp
+        itens/SilicioPuro.h
+        itens/SilicioPuro.cpp
+        itens/Agua.h
+        itens/Agua.cpp
+        itens/KitHabitat.h
+        itens/KitHabitat.cpp
+)
+
+# Assim o #include "Item.h" continua a funcionar em qualquer ficheiro, seja qual for a pasta.
+target_include_directories(TP_POO PRIVATE
+        ${CMAKE_SOURCE_DIR}/interface
+        ${CMAKE_SOURCE_DIR}/comandos
+        ${CMAKE_SOURCE_DIR}/fabrica
+        ${CMAKE_SOURCE_DIR}/maquinas
+        ${CMAKE_SOURCE_DIR}/itens
+        ${CMAKE_SOURCE_DIR}    # Settings.h; fica por ultimo para as pastas terem prioridade
 )
