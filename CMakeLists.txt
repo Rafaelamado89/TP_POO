@@ -31,9 +31,41 @@ add_executable(TP_POO
         interface/Ecra.cpp
         interface/Vista.h
         interface/Vista.cpp
+        interface/Simulador.h
+        interface/Simulador.cpp
 
         comandos/Comando.h
         comandos/Comando.cpp
+        comandos/ComandoFabrica.h
+        comandos/ComandoFabrica.cpp
+        comandos/ComandoCarrega.h
+        comandos/ComandoCarrega.cpp
+        comandos/ComandoAvanca.h
+        comandos/ComandoAvanca.cpp
+        comandos/ComandoCompra.h
+        comandos/ComandoCompra.cpp
+        comandos/ComandoMelhora.h
+        comandos/ComandoMelhora.cpp
+        comandos/ComandoContrata.h
+        comandos/ComandoContrata.cpp
+        comandos/ComandoAtribui.h
+        comandos/ComandoAtribui.cpp
+        comandos/ComandoDespede.h
+        comandos/ComandoDespede.cpp
+        comandos/ComandoEstado.h
+        comandos/ComandoEstado.cpp
+        comandos/ComandoLposicao.h
+        comandos/ComandoLposicao.cpp
+        comandos/ComandoGrava.h
+        comandos/ComandoGrava.cpp
+        comandos/ComandoRecupera.h
+        comandos/ComandoRecupera.cpp
+        comandos/ComandoExecuta.h
+        comandos/ComandoExecuta.cpp
+        comandos/ComandoAjuda.h
+        comandos/ComandoAjuda.cpp
+        comandos/ComandoFim.h
+        comandos/ComandoFim.cpp
 
         fabrica/Fabrica.h
         fabrica/Fabrica.cpp
