@@ -20,6 +20,8 @@
 #include "ComandoLposicao.h"
 #include "ComandoMelhora.h"
 #include "ComandoRecupera.h"
+#include "ComandoRoda.h"
+#include "ComandoVende.h"
 #include "Fabrica.h"
 #include "Vista.h"
 
@@ -29,6 +31,8 @@ Simulador::Simulador() : comandos{}, numComandos(0), fabrica(nullptr), terminado
     adiciona(new ComandoCarrega());
     adiciona(new ComandoAvanca());
     adiciona(new ComandoCompra());
+    adiciona(new ComandoVende());
+    adiciona(new ComandoRoda());
     adiciona(new ComandoMelhora());
     adiciona(new ComandoContrata());
     adiciona(new ComandoAtribui());

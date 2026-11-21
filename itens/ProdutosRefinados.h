@@ -9,8 +9,7 @@
 
 class ProdutosRefinados : public Item {
   public:
-    ProdutosRefinados(const std::string& nome, char simbolo, int valor) :
-        Item(nome, simbolo, valor) {}
+    ProdutosRefinados(const std::string& nome, char simbolo, int valor);
 };
 
 

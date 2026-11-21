@@ -29,12 +29,25 @@ compra o ag b
 compra r ah b
 compra l ai b
 compra t aa d extra
+vende ah
+vende ah
+vende zz
+vende
+vende ah b
+roda aa b
+roda aa x
+roda bb c
+roda zz b
+roda aa
+compra t bd d
 avanca
 avanca 2
 avanca 0
 avanca -1
 avanca abc
 avanca 2 3
+avanca 10
+lposicao ad 1
 estado
 estado x
 lposicao ac

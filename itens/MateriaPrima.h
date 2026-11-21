@@ -9,8 +9,7 @@
 
 class MateriaPrima : public Item {
   public:
-    MateriaPrima(const std::string& nome, char simbolo, int valor) :
-            Item(nome, simbolo, valor) {}
+    MateriaPrima(const std::string& nome, char simbolo, int valor);
 
     virtual Item* refina() const = 0;
 };

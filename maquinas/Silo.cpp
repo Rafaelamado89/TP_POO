@@ -72,7 +72,7 @@ bool Silo::melhora() { return false; }
 
 std::string Silo::getDescricao() const {
     std::ostringstream texto;
-    texto << "itens: " << numItens << " (";
+    texto << "silo, itens: " << numItens << " (";
     for (int i = 0; i < numItens; i++) {
         texto << itens[i]->getSimbolo();
     }

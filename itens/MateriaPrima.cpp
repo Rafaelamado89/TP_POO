@@ -3,3 +3,5 @@
 //
 
 #include "MateriaPrima.h"
+
+MateriaPrima::MateriaPrima(const std::string& nome, char simbolo, int valor) : Item(nome, simbolo, valor) {}

@@ -444,22 +444,29 @@ Maquina* Fabrica::destinoDe(int l, int c) const {
 }
 
 // Um instante: cada maquina atua sobre o terreno onde esta e entrega a vizinha na sua direcao de saida.
-// Para um item avancar no maximo uma posicao por instante, seja qual for a ordem, o instante tem duas fases:
-//   1. todas as maquinas fixam o que podem entregar neste instante (o que tinham ao comecar);
-//   2. todas atuam; o que uma maquina recebe durante a fase 2 so pode sair no instante seguinte.
-// A fase 1 (iniciaInstante) e o retorno do atua (os creditos e o evento para o resumo) chegam com a
-// interface nova da Maquina; ate la a fase 2 usa o atua atual.
+// Um item avanca no maximo uma posicao por instante, seja qual for a ordem pela qual as maquinas sao
+// processadas: quando uma maquina recebe (ou extrai) um item que seria o proximo a sair, fica marcada
+// (marcaAtividade) e nao o entrega neste instante; no fim do instante, a fabrica desliga a marca de todas
+// (fimInstante). O resumo do instante (acontecimentos e creditos) chega com o comportamento completo das
+// maquinas, na entrega final.
 void Fabrica::avancaInstante() {
     ++instante;
     std::string resumo;
 
-    // Fase 2: as maquinas atuam, linha a linha
+    // As maquinas atuam, linha a linha
     for (int l = 0; l < nLinhas; ++l) {
         for (int c = 0; c < nColunas; ++c) {
             Maquina* m = maquinas[indice(l, c)];
             if (m != nullptr) {
                 m->atua(destinoDe(l, c), grelha[indice(l, c)]);
             }
+        }
+    }
+
+    // Fim do instante: o que cada maquina recebeu neste instante ja pode sair no seguinte
+    for (Maquina* m : maquinas) {
+        if (m != nullptr) {
+            m->fimInstante();
         }
     }
 

@@ -5,18 +5,21 @@
 #include "Ecra.h"
 #include <iostream>
 
-using namespace std;
-
+// As dimensoes ficam entre 1 e o maximo do buffer
 Ecra::Ecra(int linhas, int colunas) :
-    cursorL(0), cursorC(0) {
-  if (linhas < 1) linhas = 1;
-  if (linhas > MAX_LINHAS) linhas = MAX_LINHAS;
-  if (colunas < 1) colunas = 1;
-  if (colunas > MAX_COLUNAS) colunas = MAX_COLUNAS;
-  this->linhas = linhas;
-  this->colunas = colunas;
+    linhas(limita(linhas, MAX_LINHAS)), colunas(limita(colunas, MAX_COLUNAS)), cursorL(0), cursorC(0) {
   limpa();
 }
+
+int Ecra::limita(int valor, int maximo) {
+  if (valor < 1) return 1;
+  if (valor > maximo) return maximo;
+  return valor;
+}
+
+int Ecra::getLinhas() const { return linhas; }
+
+int Ecra::getColunas() const { return colunas; }
 
 void Ecra::limpa() {
   for(int i = 0; i < linhas; i++) {
@@ -31,9 +34,9 @@ void Ecra::limpa() {
 void Ecra::mostra() const {
   for(int i = 0; i < linhas; i++) {
     for(int j = 0; j < colunas; j++) {
-      cout << Buffer[i][j];
+      std::cout << Buffer[i][j];
     }
-    cout << endl;
+    std::cout << '\n';
   }
 }
 
@@ -63,7 +66,7 @@ void Ecra::escreve(int linha, int coluna, char c) {
   escreve(c);
 }
 
-void Ecra::escreve(int linha, int coluna, const string& texto) {
+void Ecra::escreve(int linha, int coluna, const std::string& texto) {
   posiciona(linha, coluna);
   escreve(texto);
 }

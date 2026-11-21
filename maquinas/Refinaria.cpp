@@ -23,19 +23,13 @@ bool Refinaria::recebe(Item* novo) {
     return true;
 }
 
-// Por agora so entrega o item que tiver (a transformacao, que demora 4 instantes, e da entrega final)
-void Refinaria::atua(Maquina* destino, Terreno*) {
-    if (item == nullptr || agiuNesteInstante) {
-        return;
-    }
-    if (destino != nullptr && destino->recebe(item)) {
-        item = nullptr;
-    }
-}
+// A transformacao (4 instantes) e a entrega do produto refinado sao da entrega final. Por agora a refinaria
+// fica com a materia-prima que recebeu: nao a pode entregar sem a refinar.
+void Refinaria::atua(Maquina*, Terreno*) {}
 
 std::string Refinaria::getDescricao() const {
     if (item == nullptr) {
-        return "item: nenhum";
+        return "refinaria, item: nenhum";
     }
-    return "item: " + item->getNome();
+    return "refinaria, item: " + item->getNome();
 }

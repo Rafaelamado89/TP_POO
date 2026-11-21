@@ -1,5 +1,8 @@
 #include "Deposito.h"
 #include <stdexcept>
+#include "Gelo.h"
+#include "MinerioFerro.h"
+#include "SilicioBruto.h"
 
 Deposito::Deposito(char caracter, const std::string& nome, int quantidade)
     : caracter(caracter), nome(nome), quantidade(quantidade) {
@@ -18,4 +21,19 @@ std::string Deposito::getDescricao() const {
 Terreno* Deposito::clona() const { return new Deposito(*this); }
 
 
-MateriaPrima* Deposito::extrai() { return nullptr; }
+// Tira 1 unidade e devolve-a (quem chama fica dono); nullptr se ja estiver esgotado.
+// A materia-prima depende do tipo de deposito.
+MateriaPrima* Deposito::extrai() {
+    if (quantidade == 0) {
+        return nullptr;
+    }
+    --quantidade;
+    switch (caracter) {
+        case '%':
+            return new MinerioFerro();
+        case '$':
+            return new SilicioBruto();
+        default:
+            return new Gelo();
+    }
+}

@@ -12,8 +12,8 @@ class Ecra {
     public:
       Ecra(int linhas, int colunas);
 
-      int getLinhas() const { return linhas; }
-      int getColunas() const { return colunas; }
+      int getLinhas() const;
+      int getColunas() const;
       void limpa();
       void mostra() const;
       void moldura(int linha, int coluna, int altura, int largura);
@@ -24,6 +24,8 @@ class Ecra {
       void escreve(int linha, int coluna, const std::string& texto);
 
 private:
+    static int limita(int valor, int maximo);   // o valor entre 1 e maximo
+
     static const int MAX_LINHAS = Settings::ecra_max_linhas;
     static const int MAX_COLUNAS = Settings::ecra_max_colunas;
 

@@ -26,7 +26,7 @@ bool Lancador::melhora() { return false; }
 
 std::string Lancador::getDescricao() const {
     if (item == nullptr) {
-        return "item: nenhum";
+        return "lancador, item: nenhum";
     }
-    return "item por lancar: " + item->getNome();
+    return "lancador, item por lancar: " + item->getNome();
 }

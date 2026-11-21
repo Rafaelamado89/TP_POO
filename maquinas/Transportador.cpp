@@ -47,7 +47,7 @@ void Transportador::atua(Maquina* destino, Terreno*) {
 
 std::string Transportador::getDescricao() const {
     std::ostringstream texto;
-    texto << "item: ";
+    texto << "transportador, item: ";
     if (item == nullptr) {
         texto << "nenhum";
     } else {

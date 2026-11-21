@@ -5,14 +5,20 @@
 #include <vector>
 #include "Direcao.h"
 
-#include "Item.h"
-#include "Terreno.h"
-#include "Engenheiro.h"
+// Aqui so se usam ponteiros: bastam as declaracoes antecipadas
+class Engenheiro;
+class Item;
+class Terreno;
 
 class Maquina {
 public:
     Maquina(char simbolo, int custo, Direcao saida);
     virtual ~Maquina();
+
+    // As maquinas sao donas dos seus itens: a copia gerada pelo compilador so copiaria os ponteiros.
+    // Por agora nao se copiam nem se atribuem; a copia profunda chega com o comando grava.
+    Maquina(const Maquina&) = delete;
+    Maquina& operator=(const Maquina&) = delete;
 
     virtual char getSimbolo() const;   // o transportador muda de simbolo consoante leva ou nao um item
     int getCusto() const;

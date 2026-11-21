@@ -44,7 +44,7 @@ bool Oficina::melhora() { return false; }
 
 std::string Oficina::getDescricao() const {
     std::ostringstream texto;
-    texto << "placas: " << placasFerro << ", silicio puro: " << silicioPuro << ", agua: " << agua;
+    texto << "oficina, placas: " << placasFerro << ", silicio puro: " << silicioPuro << ", agua: " << agua;
     if (kit != nullptr) {
         texto << ", kit por entregar";
     }

@@ -44,6 +44,10 @@ add_executable(TP_POO
         comandos/ComandoAvanca.cpp
         comandos/ComandoCompra.h
         comandos/ComandoCompra.cpp
+        comandos/ComandoVende.h
+        comandos/ComandoVende.cpp
+        comandos/ComandoRoda.h
+        comandos/ComandoRoda.cpp
         comandos/ComandoMelhora.h
         comandos/ComandoMelhora.cpp
         comandos/ComandoContrata.h

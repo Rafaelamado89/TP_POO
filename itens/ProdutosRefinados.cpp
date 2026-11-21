@@ -3,3 +3,6 @@
 //
 
 #include "ProdutosRefinados.h"
+
+ProdutosRefinados::ProdutosRefinados(const std::string& nome, char simbolo, int valor) :
+    Item(nome, simbolo, valor) {}
