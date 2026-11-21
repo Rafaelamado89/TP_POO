@@ -14,7 +14,7 @@ public:
     Maquina(char simbolo, int custo, Direcao saida);
     virtual ~Maquina();
 
-    char getSimbolo() const;
+    virtual char getSimbolo() const;   // o transportador muda de simbolo consoante leva ou nao um item
     int getCusto() const;
     Direcao getSaida() const;
     void setSaida(Direcao saida);	// comando roda
@@ -27,6 +27,16 @@ public:
     void associa(Engenheiro* e);
     void desassocia(Engenheiro* e);
     int getNumEngenheiros() const;
+
+    // Chamada pela fabrica no fim de cada instante, depois de todas as maquinas terem atuado
+    void fimInstante();
+
+protected:
+    // "Acabei de receber (ou produzir) um item neste instante": o item so avanca no instante seguinte.
+    // E isto que garante que um item anda no maximo uma posicao por instante, seja qual for a ordem
+    // pela qual a fabrica chama as maquinas.
+    bool agiuNesteInstante;
+    void marcaAtividade();
 
 private:
     char simbolo;

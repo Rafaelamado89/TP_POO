@@ -9,8 +9,24 @@ Perfuradora::~Perfuradora() {
     delete item;
 }
 
-// Por implementar
+// Nao aceita itens de outras maquinas
 bool Perfuradora::recebe(Item*) { return false; }
-void Perfuradora::atua(Maquina*, Terreno*) {}
+
+// Por agora so entrega o item que tiver (a extracao do deposito e a perda sao da entrega final)
+void Perfuradora::atua(Maquina* destino, Terreno*) {
+    if (item == nullptr || agiuNesteInstante) {
+        return;
+    }
+    if (destino != nullptr && destino->recebe(item)) {
+        item = nullptr;
+    }
+}
+
 bool Perfuradora::melhora() { return false; }
-std::string Perfuradora::getDescricao() const { return ""; }
+
+std::string Perfuradora::getDescricao() const {
+    if (item == nullptr) {
+        return "item: nenhum";
+    }
+    return "item: " + item->getNome();
+}
