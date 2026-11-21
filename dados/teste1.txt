@@ -1,0 +1,68 @@
+ajuda
+estado
+compra t aa d
+fabrica
+fabrica abc 5
+fabrica 0 5
+fabrica 27 5
+carrega nao_existe.txt
+xyz
+carrega mapa1.txt
+fabrica 5 5
+carrega mapa1.txt
+ajuda compra
+ajuda xpto
+ajuda compra a
+compra
+compra x aa d
+compra t a1 d
+compra t zz d
+compra t aa x
+compra t bh d
+compra t aa d
+compra t aa b
+compra p ac d
+compra s ad b
+compra o ae b
+compra o af b
+compra o ag b
+compra r ah b
+compra l ai b
+compra t aa d extra
+avanca
+avanca 2
+avanca 0
+avanca -1
+avanca abc
+avanca 2 3
+estado
+estado x
+lposicao ac
+lposicao bh 1
+lposicao zz
+lposicao c1
+lposicao aa -1
+lposicao aa x
+lposicao aa 0 1
+melhora ac
+melhora
+melhora zz
+contrata joaquim
+contrata
+contrata joaquim silva
+atribui 1 ac
+atribui x ac
+atribui 0 ac
+atribui 1
+despede 2
+despede x
+grava antes
+grava
+recupera antes
+recupera
+executa teste1.txt
+executa nao_existe.txt
+executa
+fim x
+fim
+estado
