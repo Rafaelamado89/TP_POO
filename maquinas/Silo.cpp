@@ -6,7 +6,7 @@
 
 Silo::Silo(Direcao saida)
     : Maquina('S', Settings::silo_custo, saida),
-      itens(nullptr), numItens(0), probPerda(Settings::silo_prob_perda) {}
+      itens(nullptr), numItens(0), novos(0), probPerda(Settings::silo_prob_perda) {}
 
 Silo::~Silo() {
     for (int i = 0; i < numItens; i++) {
@@ -28,12 +28,12 @@ bool Silo::recebe(Item* novo) {
     maior[numItens] = novo;
     delete[] itens;
     itens = maior;
-    if (numItens == 0) {
-        marcaAtividade();   // o mais antigo e este, que acabou de chegar: so segue no instante seguinte
-    }
     numItens++;
+    novos++;
     return true;
 }
+
+void Silo::fimInstante() { novos = 0; }
 
 Item* Silo::retiraMaisAntigo() {
     Item* antigo = itens[0];
@@ -53,14 +53,13 @@ Item* Silo::retiraMaisAntigo() {
 }
 
 void Silo::atua(Maquina* destino, Terreno*) {
-    if (numItens == 0 || agiuNesteInstante) {
-        return;
-    }
-    if (Aleatorio::entre(1, 100) <= probPerda) {
+    int antigos = numItens - novos;   // os que ja ca estavam no inicio do instante
+
+    if (antigos > 0 && Aleatorio::entre(1, 100) <= probPerda) {
         delete retiraMaisAntigo();
-        return;
+        --antigos;
     }
-    if (destino != nullptr && destino->recebe(itens[0])) {
+    if (antigos > 0 && destino != nullptr && destino->recebe(itens[0])) {
         retiraMaisAntigo();   // o destino ficou com ele (e e agora o dono): nao se apaga
     }
 }

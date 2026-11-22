@@ -1,4 +1,5 @@
 #include "Perfuradora.h"
+#include <sstream>
 #include "Aleatorio.h"
 #include "Item.h"
 #include "MateriaPrima.h"
@@ -45,8 +46,13 @@ void Perfuradora::atua(Maquina* destino, Terreno* terreno) {
 bool Perfuradora::melhora() { return false; }
 
 std::string Perfuradora::getDescricao() const {
+    std::ostringstream texto;
+    texto << "perfuradora, ";
     if (item == nullptr) {
-        return "perfuradora, item: nenhum";
+        texto << "item: nenhum, progresso: " << instantes << "/" << Settings::perfuradora_periodo << " instantes";
+    } else {
+        texto << "item por entregar: " << item->getNome();
     }
-    return "perfuradora, item: " + item->getNome();
+    texto << ", perda: " << probPerda << "%";
+    return texto.str();
 }

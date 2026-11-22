@@ -70,7 +70,7 @@ void Vista::desenhaPainel(Ecra& e, const Fabrica& fab, int coluna, int altura) {
     // Se nem com o ecra no tamanho maximo couberem todas, a ultima diz quantas ficaram de fora.
     const std::string& resumo = fab.getResumoUltimoInstante();
     if (resumo.empty()) {
-        e.escreve(linhaResumo, coluna + 2, "nada a assinalar");
+        e.escreve(linhaResumo, coluna + 2, "(sem resumo nesta versao)");
         return;
     }
     const int total = contaLinhas(resumo);

@@ -23,8 +23,9 @@ void Lancador::atua(Maquina*, Terreno*) {}
 bool Lancador::melhora() { return false; }
 
 std::string Lancador::getDescricao() const {
+    const std::string perda = ", perda: " + std::to_string(probPerda) + "%";
     if (item == nullptr) {
-        return "lancador, item: nenhum";
+        return "lancador, item: nenhum" + perda;
     }
-    return "lancador, item por lancar: " + item->getNome();
+    return "lancador, item por lancar: " + item->getNome() + perda;
 }

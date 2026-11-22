@@ -32,7 +32,7 @@ public:
     void desassocia(Engenheiro* e);
     int getNumEngenheiros() const;
 
-    void fimInstante();
+    virtual void fimInstante();
 
 protected:
     // "Acabei de receber (ou produzir) um item neste instante": o item so avanca no instante seguinte.
