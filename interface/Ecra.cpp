@@ -5,7 +5,6 @@
 #include "Ecra.h"
 #include <iostream>
 
-// As dimensoes ficam entre 1 e o maximo do buffer
 Ecra::Ecra(int linhas, int colunas) :
     linhas(limita(linhas, MAX_LINHAS)), colunas(limita(colunas, MAX_COLUNAS)), cursorL(0), cursorC(0) {
   limpa();
@@ -46,7 +45,6 @@ void Ecra::posiciona(int linha, int coluna) {
 }
 
 void Ecra::escreve(char c) {
-  // Ignora fora dos limites
   if (cursorL < 0 || cursorL >= linhas || cursorC < 0 || cursorC >= colunas) {
     cursorC++;
     return;
@@ -77,21 +75,18 @@ void Ecra::moldura(int linha, int coluna, int altura, int largura) {
   int ultL = linha + altura - 1;
   int ultC = coluna + largura - 1;
 
-  // bordas horizontais
   for (int j = coluna; j <= ultC; j++) {
     posiciona(linha, j);
     escreve('-');
     posiciona(ultL, j);
     escreve('-');
   }
-  // bordas verticais
   for (int i = linha; i <= ultL; i++) {
     posiciona(i, coluna);
     escreve('|');
     posiciona(i, ultC);
     escreve('|');
 }
-  // cantos
   posiciona(linha, coluna);
   escreve('+');
   posiciona(linha, ultC);

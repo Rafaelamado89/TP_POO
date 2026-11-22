@@ -14,7 +14,7 @@ public:
     std::string getDescricao() const override;
 
 private:
-    Item* item;               // materia-prima extraida por entregar (no maximo 1); nullptr se nao tiver
+    Item* item;
     int instantes;
     int probPerda;
 };

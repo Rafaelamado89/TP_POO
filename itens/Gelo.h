@@ -5,8 +5,6 @@
 #ifndef GELO_H
 #define GELO_H
 
-
-
 #include "MateriaPrima.h"
 
 class Gelo : public MateriaPrima {
@@ -16,7 +14,5 @@ public:
     Item* refina() const override;
     Item* clona() const override;
 };
-
-
 
 #endif //GELO_H

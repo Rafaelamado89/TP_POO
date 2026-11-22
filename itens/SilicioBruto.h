@@ -5,8 +5,6 @@
 #ifndef SILICIOBRUTO_H
 #define SILICIOBRUTO_H
 
-
-
 #include "MateriaPrima.h"
 
 class SilicioBruto : public MateriaPrima {
@@ -16,7 +14,5 @@ public:
     Item* refina() const override;
     Item* clona() const override;
 };
-
-
 
 #endif //SILICIOBRUTO_H

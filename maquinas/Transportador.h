@@ -8,13 +8,13 @@ public:
     explicit Transportador(Direcao saida);
     ~Transportador();
 
-    char getSimbolo() const override;   // a seta da direcao se estiver vazio; o caracter do item se levar um
+    char getSimbolo() const override;
     bool recebe(Item* item) override;
     void atua(Maquina* destino, Terreno* terreno) override;
     std::string getDescricao() const override;
 
 private:
-    Item* item;               // item que transporta; nullptr se estiver vazio
+    Item* item;
 };
 
 #endif //TRANSPORTADOR_H

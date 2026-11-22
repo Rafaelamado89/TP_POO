@@ -24,20 +24,17 @@ class Ecra {
       void escreve(int linha, int coluna, const std::string& texto);
 
 private:
-    static int limita(int valor, int maximo);   // o valor entre 1 e maximo
+    static int limita(int valor, int maximo);
 
     static const int MAX_LINHAS = Settings::ecra_max_linhas;
     static const int MAX_COLUNAS = Settings::ecra_max_colunas;
 
     char Buffer[MAX_LINHAS][MAX_COLUNAS];
 
-
     int linhas, colunas;
 
     int cursorL;
     int cursorC;
 };
-
-
 
 #endif //ECRA_H

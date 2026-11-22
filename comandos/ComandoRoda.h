@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// roda <lc> <dir>: muda a direcao de saida da maquina da posicao lc
 class ComandoRoda : public Comando {
 public:
     ComandoRoda();

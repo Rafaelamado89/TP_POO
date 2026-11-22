@@ -14,7 +14,6 @@ bool ComandoAjuda::precisaFabrica() const {
 bool ComandoAjuda::executa(Simulador& sim, std::istringstream& args) {
     std::string nome;
 
-    // Sem parametro: todos os comandos, um por linha, com a sintaxe resumida
     if (!(args >> nome)) {
         std::ostringstream lista;
         lista << "Comandos:";
@@ -26,7 +25,6 @@ bool ComandoAjuda::executa(Simulador& sim, std::istringstream& args) {
         return true;
     }
 
-    // Com o nome de um comando: a ajuda que esse comando da de si proprio
     if (!semMaisParametros(args)) {
         return erroSintaxe(sim);
     }

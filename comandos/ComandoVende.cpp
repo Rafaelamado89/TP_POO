@@ -28,7 +28,6 @@ bool ComandoVende::executa(Simulador& sim, std::istringstream& args) {
         return false;
     }
 
-    // A fabrica recebe a percentagem do custo de compra definida na Settings; os itens da maquina perdem-se
     int ganho = m->getCusto() * Settings::maquina_percentagem_venda / 100;
     fab.removeMaquina(p);
     fab.recebeCreditos(ganho);

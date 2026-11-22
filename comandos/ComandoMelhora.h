@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// melhora <lc>: melhora a maquina da posicao lc. Nesta versao so valida os parametros.
 class ComandoMelhora : public Comando {
 public:
     ComandoMelhora();

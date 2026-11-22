@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// lposicao <lc> [n]: o terreno e a maquina da posicao lc (ou de todas as do quadrado de raio n a volta)
 class ComandoLposicao : public Comando {
 public:
     ComandoLposicao();

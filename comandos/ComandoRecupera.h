@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// recupera <nome>: volta a fabrica guardada com esse nome. Nesta versao so valida os parametros.
 class ComandoRecupera : public Comando {
 public:
     ComandoRecupera();

@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// estado: o instante, os creditos, as maquinas, os engenheiros e o total enviado de cada tipo
 class ComandoEstado : public Comando {
 public:
     ComandoEstado();

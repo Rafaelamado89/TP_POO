@@ -4,10 +4,9 @@
 
 int main() {
     try {
-        Simulador simulador;   // cria os comandos; a fabrica so com o fabrica ou o carrega
-        simulador.corre();     // ate ao comando fim (ou ao fim da entrada)
+        Simulador simulador;
+        simulador.corre();
     } catch (const std::exception& e) {
-        // Os erros esperados e os de cada comando sao tratados la dentro; isto e para nada ficar por tratar
         std::cerr << "Erro inesperado: " << e.what() << '\n';
         return 1;
     }

@@ -12,6 +12,4 @@ class ProdutosRefinados : public Item {
     ProdutosRefinados(const std::string& nome, char simbolo, int valor);
 };
 
-
-
 #endif //PRODUTOSREFINADOS_H

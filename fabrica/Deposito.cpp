@@ -20,9 +20,7 @@ std::string Deposito::getDescricao() const {
 
 Terreno* Deposito::clona() const { return new Deposito(*this); }
 
-
 // Tira 1 unidade e devolve-a (quem chama fica dono); nullptr se ja estiver esgotado.
-// A materia-prima depende do tipo de deposito.
 MateriaPrima* Deposito::extrai() {
     if (quantidade == 0) {
         return nullptr;

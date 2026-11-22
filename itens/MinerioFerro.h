@@ -15,6 +15,4 @@ class MinerioFerro : public MateriaPrima {
     Item* clona() const override;
 };
 
-
-
 #endif //MINERIOFERRO_H

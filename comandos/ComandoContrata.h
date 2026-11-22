@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// contrata <nome>: contrata um engenheiro, que fica livre. Nesta versao so valida os parametros.
 class ComandoContrata : public Comando {
 public:
     ComandoContrata();

@@ -8,7 +8,6 @@
 #include "Settings.h"
 
 namespace {
-    // Quantas linhas tem um texto (o resumo do ultimo instante tem uma por acontecimento)
     int contaLinhas(const std::string& texto) {
         std::istringstream is(texto);
         std::string linha;
@@ -33,12 +32,10 @@ void Vista::mostra(const Fabrica& fab) {
     e.mostra();
 }
 
-// moldura, regua das colunas, uma linha do ecra por linha da fabrica, uma linha vazia, moldura
 int Vista::alturaFabrica(const Fabrica& fab) {
     return fab.getLinhas() + 4;
 }
 
-// moldura, regua das linhas, espaco, uma coluna do ecra por coluna da fabrica, espaco, moldura
 int Vista::larguraFabrica(const Fabrica& fab) {
     return fab.getColunas() + 5;
 }
@@ -46,7 +43,6 @@ int Vista::larguraFabrica(const Fabrica& fab) {
 void Vista::desenhaFabrica(Ecra& e, const Fabrica& fab) {
     e.moldura(0, 0, alturaFabrica(fab), larguraFabrica(fab));
 
-    // Regua: as letras das posicoes, em maiusculas para nao se confundirem com o conteudo
     for (int c = 0; c < fab.getColunas(); ++c) {
         e.escreve(grelhaLinha - 1, grelhaColuna + c, static_cast<char>('A' + c));
     }

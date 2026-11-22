@@ -11,7 +11,6 @@ bool ComandoEstado::executa(Simulador& sim, std::istringstream& args) {
     if (!semMaisParametros(args)) {
         return erroSintaxe(sim);
     }
-    // A fabrica monta o texto (nao escreve na consola); quem o mostra e o Simulador
     sim.informa(sim.getFabrica().descricaoEstado());
     return true;
 }

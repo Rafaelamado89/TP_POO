@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// fim: termina o programa (o Simulador liberta tudo ao ser destruido)
 class ComandoFim : public Comando {
 public:
     ComandoFim();

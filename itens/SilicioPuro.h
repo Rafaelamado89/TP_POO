@@ -13,6 +13,4 @@ class SilicioPuro : public ProdutosRefinados {
     Item* clona() const override;
 };
 
-
-
 #endif //SILICIOPURO_H

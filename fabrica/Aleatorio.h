@@ -14,5 +14,4 @@ public:
     static std::mt19937& gerador();
 };
 
-
 #endif //ALEATORIO_H

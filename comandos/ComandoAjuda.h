@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// ajuda [comando]: a lista dos comandos (sintaxe resumida) ou a ajuda detalhada de um deles
 class ComandoAjuda : public Comando {
 public:
     ComandoAjuda();

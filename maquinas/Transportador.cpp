@@ -26,13 +26,12 @@ char Transportador::getSimbolo() const {
     }
 }
 
-// So aceita se estiver vazio. Fica dono do item.
 bool Transportador::recebe(Item* novo) {
     if (novo == nullptr || item != nullptr) {
         return false;
     }
     item = novo;
-    marcaAtividade();   // acabou de chegar: so segue no instante seguinte
+    marcaAtividade();
     return true;
 }
 
@@ -41,7 +40,7 @@ void Transportador::atua(Maquina* destino, Terreno*) {
         return;
     }
     if (destino != nullptr && destino->recebe(item)) {
-        item = nullptr;   // o destino ficou com ele (e e agora o dono)
+        item = nullptr;
     }
 }
 

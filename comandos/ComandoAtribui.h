@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// atribui <id> <lc>: associa um engenheiro a maquina da posicao lc. Nesta versao so valida os parametros.
 class ComandoAtribui : public Comando {
 public:
     ComandoAtribui();

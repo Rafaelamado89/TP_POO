@@ -14,7 +14,7 @@ bool ComandoLposicao::executa(Simulador& sim, std::istringstream& args) {
     if (!(args >> txtPosicao)) {
         return erroSintaxe(sim);
     }
-    int raio = 0;   // sem n, so a propria posicao
+    int raio = 0;
     if (args >> txtRaio) {
         if (!semMaisParametros(args)) {
             return erroSintaxe(sim);

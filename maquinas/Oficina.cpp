@@ -10,7 +10,6 @@ Oficina::~Oficina() {
     delete kit;
 }
 
-// Aceita apenas os ingredientes da receita (p, i, a), ate ter a quantidade de cada um.
 // O item recebido fica contado e e apagado (os ingredientes sao gastos na producao).
 bool Oficina::recebe(Item* novo) {
     if (novo == nullptr) {
@@ -30,7 +29,6 @@ bool Oficina::recebe(Item* novo) {
     return true;
 }
 
-// Por agora so entrega o kit que tiver (a producao, que demora 5 instantes, e da entrega final)
 void Oficina::atua(Maquina* destino, Terreno*) {
     if (kit == nullptr || agiuNesteInstante) {
         return;

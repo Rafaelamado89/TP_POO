@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// grava <nome>: guarda em memoria uma copia da fabrica. Nesta versao so valida os parametros.
 class ComandoGrava : public Comando {
 public:
     ComandoGrava();

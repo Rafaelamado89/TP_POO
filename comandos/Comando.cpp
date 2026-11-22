@@ -24,7 +24,6 @@ bool Comando::precisaFabrica() const {
     return true;
 }
 
-// Se ainda se consegue ler uma palavra, a linha tem parametros a mais
 bool Comando::semMaisParametros(std::istringstream& args) {
     std::string sobra;
     return !(args >> sobra);
@@ -57,7 +56,6 @@ bool Comando::paraDirecao(const std::string& texto, Direcao& direcao) {
     return true;
 }
 
-// Uma posicao bem escrita (duas letras) e que exista nesta fabrica
 bool Comando::posicaoNaFabrica(Simulador& sim, const std::string& texto, Posicao& posicao) {
     if (!Posicao::deTexto(texto, posicao)) {
         sim.informa("Posicao invalida: '" + texto + "' (duas letras, linha e coluna, ex.: ce)");

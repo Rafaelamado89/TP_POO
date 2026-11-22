@@ -9,7 +9,6 @@
 
 class MateriaPrima;
 
-
 class Terreno {
 public:
     virtual ~Terreno();

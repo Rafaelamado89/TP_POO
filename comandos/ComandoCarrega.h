@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// carrega <nome-do-ficheiro>: cria a fabrica a partir do mapa descrito num ficheiro de texto
 class ComandoCarrega : public Comando {
 public:
     ComandoCarrega();

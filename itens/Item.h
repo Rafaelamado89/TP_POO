@@ -6,7 +6,6 @@
 #define ITEM_H
 #include <string>
 
-
 class Item {
   public:
     Item(const std::string& nome, char simbolo, int valor);
@@ -24,7 +23,5 @@ class Item {
     std::string nome;
 
 };
-
-
 
 #endif //ITEM_H

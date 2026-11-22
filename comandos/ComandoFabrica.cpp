@@ -9,7 +9,6 @@
 ComandoFabrica::ComandoFabrica() : Comando("fabrica", "fabrica <nl> <nc>") {
 }
 
-// E ele que cria a fabrica: corre sem ela (e recusa-se se ja existir)
 bool ComandoFabrica::precisaFabrica() const {
     return false;
 }

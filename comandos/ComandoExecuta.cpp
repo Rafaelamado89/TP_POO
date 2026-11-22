@@ -8,7 +8,6 @@
 ComandoExecuta::ComandoExecuta() : Comando("executa", "executa <nome-do-ficheiro>"), numEmCurso(0) {
 }
 
-// Pode ser usado antes de haver fabrica (o proprio ficheiro pode cria-la)
 bool ComandoExecuta::precisaFabrica() const {
     return false;
 }
@@ -33,8 +32,6 @@ bool ComandoExecuta::executa(Simulador& sim, std::istringstream& args) {
         return false;
     }
 
-    // Cada linha vai para o mesmo processa do teclado: so muda a origem do texto.
-    // O processa apanha as excecoes, por isso o numEmCurso volta sempre a descer.
     emCurso[numEmCurso++] = nomeFicheiro;
     int total = 0, falhados = 0;
     std::string linha;
@@ -45,9 +42,9 @@ bool ComandoExecuta::executa(Simulador& sim, std::istringstream& args) {
         std::istringstream temTexto(linha);
         std::string palavra;
         if (!(temTexto >> palavra)) {
-            continue;   // linha vazia
+            continue;
         }
-        sim.informa("\n> " + linha);   // mostra o comando, como se tivesse sido escrito
+        sim.informa("\n> " + linha);
         ++total;
         if (!sim.processa(linha)) {
             ++falhados;

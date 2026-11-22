@@ -25,7 +25,6 @@
 #include "Fabrica.h"
 #include "Vista.h"
 
-// Os comandos sao criados uma vez, pela ordem do enunciado, e vivem ate ao fim do programa
 Simulador::Simulador() : comandos{}, numComandos(0), fabrica(nullptr), terminado(false) {
     adiciona(new ComandoFabrica());
     adiciona(new ComandoCarrega());
@@ -46,7 +45,6 @@ Simulador::Simulador() : comandos{}, numComandos(0), fabrica(nullptr), terminado
     adiciona(new ComandoFim());
 }
 
-// A saida limpa: a fabrica (que apaga os seus terrenos e maquinas) e cada um dos comandos
 Simulador::~Simulador() {
     delete fabrica;
     for (int i = 0; i < numComandos; ++i) {
@@ -76,12 +74,11 @@ void Simulador::corre() {
     }
 }
 
-// O mesmo caminho para o teclado e para o executa: so muda a origem da linha
 bool Simulador::processa(const std::string& linha) {
     std::istringstream args(linha);
     std::string nome;
     if (!(args >> nome)) {
-        return true;   // linha vazia: nao ha nada a fazer
+        return true;
     }
 
     const int i = indiceDe(nome);

@@ -13,10 +13,8 @@ void Maquina::setSaida(Direcao saida) { this->saida = saida; }
 void Maquina::marcaAtividade() { agiuNesteInstante = true; }
 void Maquina::fimInstante() { agiuNesteInstante = false; }
 
-
 bool Maquina::melhora() { return false; }
 
-//Por implementar
 void Maquina::associa(Engenheiro*) {}
 void Maquina::desassocia(Engenheiro*) {}
 int Maquina::getNumEngenheiros() const { return 0; }

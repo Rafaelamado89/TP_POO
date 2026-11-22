@@ -3,7 +3,6 @@
 
 #include "Maquina.h"
 
-
 class Lancador : public Maquina {
 public:
     explicit Lancador(Direcao saida);
@@ -15,9 +14,9 @@ public:
     std::string getDescricao() const override;
 
 private:
-    Item* item;               // item por lancar; nullptr se nao tiver
-    int instantesRestantes;   // instantes que faltam para poder lancar de novo
-    int probPerda;            // probabilidade (%) de o item se perder no lancamento
+    Item* item;
+    int instantesRestantes;
+    int probPerda;
 };
 
 #endif //LANCADOR_H

@@ -56,18 +56,15 @@ void Silo::atua(Maquina* destino, Terreno*) {
     if (numItens == 0 || agiuNesteInstante) {
         return;
     }
-    // A cada instante ha uma probabilidade de se perder o item guardado ha mais tempo
     if (Aleatorio::entre(1, 100) <= probPerda) {
         delete retiraMaisAntigo();
         return;
     }
-    // Senao, tenta entrega-lo na direcao de saida
     if (destino != nullptr && destino->recebe(itens[0])) {
         retiraMaisAntigo();   // o destino ficou com ele (e e agora o dono): nao se apaga
     }
 }
 
-// A melhoria do silo e so da entrega final
 bool Silo::melhora() { return false; }
 
 std::string Silo::getDescricao() const {

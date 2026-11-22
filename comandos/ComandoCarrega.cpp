@@ -8,7 +8,6 @@
 ComandoCarrega::ComandoCarrega() : Comando("carrega", "carrega <nome-do-ficheiro>") {
 }
 
-// E ele que cria a fabrica: corre sem ela (e recusa-se se ja existir)
 bool ComandoCarrega::precisaFabrica() const {
     return false;
 }
@@ -25,7 +24,7 @@ bool ComandoCarrega::executa(Simulador& sim, std::istringstream& args) {
     }
 
     std::string erro;
-    Fabrica* nova = Fabrica::carrega(nomeFicheiro, erro);   // nullptr se falhar: nesse caso nada foi criado
+    Fabrica* nova = Fabrica::carrega(nomeFicheiro, erro);
     if (nova == nullptr) {
         sim.informa("Nao foi possivel carregar '" + nomeFicheiro + "' (" + erro + "): a fabrica nao foi criada");
         return false;

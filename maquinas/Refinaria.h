@@ -13,7 +13,7 @@ public:
     std::string getDescricao() const override;
 
 private:
-    Item* item;               // materia-prima a transformar ou produto por entregar; nullptr se estiver vazia
+    Item* item;
     int instantesRestantes;
 };
 

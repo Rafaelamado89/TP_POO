@@ -9,7 +9,6 @@ Refinaria::~Refinaria() {
     delete item;
 }
 
-// Aceita apenas materias-primas (f, s, g), uma de cada vez e so se estiver vazia. Fica dona do item.
 bool Refinaria::recebe(Item* novo) {
     if (novo == nullptr || item != nullptr) {
         return false;
@@ -23,8 +22,7 @@ bool Refinaria::recebe(Item* novo) {
     return true;
 }
 
-// A transformacao (4 instantes) e a entrega do produto refinado sao da entrega final. Por agora a refinaria
-// fica com a materia-prima que recebeu: nao a pode entregar sem a refinar.
+// Por agora fica com a materia-prima que recebeu: nao a pode entregar sem a refinar
 void Refinaria::atua(Maquina*, Terreno*) {}
 
 std::string Refinaria::getDescricao() const {

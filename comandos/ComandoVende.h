@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// vende <lc>: vende a maquina da posicao lc, recebendo uma percentagem do custo de compra (Settings)
 class ComandoVende : public Comando {
 public:
     ComandoVende();

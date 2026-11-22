@@ -4,7 +4,6 @@
 #include <string>
 #include "Comando.h"
 
-// executa <nome-do-ficheiro>: executa os comandos de um ficheiro, um por linha, como se viessem do teclado
 class ComandoExecuta : public Comando {
 public:
     ComandoExecuta();

@@ -14,7 +14,7 @@ public:
     std::string getDescricao() const override;
 
 private:
-    Item* retiraMaisAntigo();   // tira o item mais antigo do array (nao o apaga: devolve-o)
+    Item* retiraMaisAntigo();
 
     Item** itens;   // array dinamico com exatamente numItens ponteiros; itens[0] e o mais antigo
     int numItens;

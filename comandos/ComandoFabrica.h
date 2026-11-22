@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// fabrica <nl> <nc>: cria a fabrica com essas dimensoes, com crateras e depositos em posicoes aleatorias
 class ComandoFabrica : public Comando {
 public:
     ComandoFabrica();

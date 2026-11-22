@@ -6,5 +6,4 @@
 
 Terreno::~Terreno() {}
 
-
 MateriaPrima* Terreno::extrai() { return nullptr; }

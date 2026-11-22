@@ -14,6 +14,4 @@ class KitHabitat : public ProdutosRefinados {
 
 };
 
-
-
 #endif //KITHABITAT_H

@@ -9,7 +9,7 @@ ComandoAvanca::ComandoAvanca() : Comando("avanca", "avanca [n]") {
 }
 
 bool ComandoAvanca::executa(Simulador& sim, std::istringstream& args) {
-    int n = 1;   // sem parametro, avanca 1
+    int n = 1;
     std::string txtN;
     if (args >> txtN) {
         if (!semMaisParametros(args)) {
@@ -21,7 +21,6 @@ bool ComandoAvanca::executa(Simulador& sim, std::istringstream& args) {
         }
     }
 
-    // Um instante de cada vez, e o ecra no fim de cada um
     Fabrica& fab = sim.getFabrica();
     for (int i = 0; i < n; ++i) {
         fab.avancaInstante();

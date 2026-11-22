@@ -35,7 +35,6 @@ bool ComandoCompra::executa(Simulador& sim, std::istringstream& args) {
         return false;
     }
 
-    // Quem decide se a compra pode ser feita (cratera, ocupada, creditos) e a fabrica
     std::string erro;
     if (!sim.getFabrica().compra(criaMaquina(txtTipo[0], saida), p, erro)) {
         sim.informa("Nao foi possivel comprar: " + erro);

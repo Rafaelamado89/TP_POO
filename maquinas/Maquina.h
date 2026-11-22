@@ -5,7 +5,6 @@
 #include <vector>
 #include "Direcao.h"
 
-// Aqui so se usam ponteiros: bastam as declaracoes antecipadas
 class Engenheiro;
 class Item;
 class Terreno;
@@ -15,26 +14,24 @@ public:
     Maquina(char simbolo, int custo, Direcao saida);
     virtual ~Maquina();
 
-    // As maquinas sao donas dos seus itens: a copia gerada pelo compilador so copiaria os ponteiros.
-    // Por agora nao se copiam nem se atribuem; a copia profunda chega com o comando grava.
+    // As maquinas sao donas dos seus itens: a copia gerada so copiaria os ponteiros
     Maquina(const Maquina&) = delete;
     Maquina& operator=(const Maquina&) = delete;
 
     virtual char getSimbolo() const;   // o transportador muda de simbolo consoante leva ou nao um item
     int getCusto() const;
     Direcao getSaida() const;
-    void setSaida(Direcao saida);	// comando roda
+    void setSaida(Direcao saida);
 
     virtual bool recebe(Item* item) = 0;
     virtual void atua(Maquina* destino, Terreno* terreno) = 0;
-    virtual bool melhora(); 	// comando melhora
+    virtual bool melhora();
     virtual std::string getDescricao() const = 0;
 
     void associa(Engenheiro* e);
     void desassocia(Engenheiro* e);
     int getNumEngenheiros() const;
 
-    // Chamada pela fabrica no fim de cada instante, depois de todas as maquinas terem atuado
     void fimInstante();
 
 protected:
